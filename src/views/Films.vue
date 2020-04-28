@@ -1,6 +1,6 @@
 <template>
     <div>
-        <film-list films="films"></film-list>
+        <film-list :films="films"></film-list>
     </div>
 </template>
 
@@ -8,6 +8,7 @@
 
 import FilmList from '@/components/FilmList.vue';
 import FilmService from '@/services/FilmService.js';
+
     export default {
         name:'app',
         components : {
@@ -22,10 +23,8 @@ import FilmService from '@/services/FilmService.js';
          created () {
              this.loading = true;
              FilmService.getFilms()
-            .then(response => {
-                this.films = response.data;
+            .then(response => {this.films = response.data})
             
-             })
          }
     }
      

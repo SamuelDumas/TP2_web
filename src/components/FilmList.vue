@@ -1,8 +1,8 @@
 <template>
     <div>
-         <ul class="products">
+         <ul class="films">
             <li v-for="film in films" :key="film.id">
-                <span class="name">{{ film.title }}</span>
+                <span class="title">{{ film.title }}</span>
                 <span class="description">{{ film.description }}</span>
             </li>
         </ul>
@@ -20,11 +20,6 @@
                 default:() =>[]
             }
         },
-        data(){
-           return{
-               title
-           }
-        }
     }
 </script>
 
