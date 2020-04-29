@@ -11,6 +11,6 @@ const apiClient = axios.create({
 
 export default {
   getFilms() {
-    return apiClient.get()
+    return apiClient.get();
   }
 }

@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import Films from './views/Films.vue'
+import App from './App.vue'
 import router from './router'
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
-  render: h => h(Films)
+  render: h => h(App)
 }).$mount('#app')

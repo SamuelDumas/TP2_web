@@ -1,12 +1,21 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="api/films">Films</router-link>
+      <films></films>
     </div>
     <router-view/>
   </div>
 </template>
+<script>
+import Films from '@/views/Films.vue';
+export default {
 
+
+  components:{
+    Films
+  }
+}
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

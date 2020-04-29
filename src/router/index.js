@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Films from '../views/Films.vue'
+import App from '../App.vue'
 
 
 Vue.use(VueRouter)
 
   const routes = [
   {
-    path: '/api/films',
+    path: '',
     name: 'Films',
-    component: Films
+    component: App
   },
 ]
 
