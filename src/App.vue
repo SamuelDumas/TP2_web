@@ -3,7 +3,7 @@
     <div id="nav">
       <films></films>
     </div>
-    <router-view/>
+    <!--<router-view/>-->
   </div>
 </template>
 <script>
