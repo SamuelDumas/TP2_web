@@ -1,36 +1,73 @@
 <template>
     <div>
-         <h2>{{ title }}</h2>
+         <h1>{{ title }}</h1>
         <fieldset class="filters" value = "recherche">
-            <span>Recherche: <input v-model="filterName" /></span>
+            <span class="search">Recherche: <input v-model="filterName" /></span>
         </fieldset> 
+        <div class="page">
         <button @click="prevPage" :disabled="pageNumber===1">
           &lt; Précédent
         </button>
         Page {{ pageNumber }}
-        <button @click="nextPage" :disabled="pageNumber >= pageCount">
+        <button  @click="nextPage" :disabled="pageNumber >= pageCount">
           Suivant &gt;
         </button>
-         <ul class="films">
-            <li v-for="film in sortedFilteredPaginatedFilms" :key="film.id"
+        </div>
+      <div v-if="this.filterName === ''">
+          <table class="films" align="center">
+            <tr><td colspan="3"><h2> Les derniers films ajoutés</h2></td></tr>
+            <tr>
+              <th>Titre</th>
+              <th>Description</th>
+              <th>Rating</th>
+              <th>image</th>
+            </tr>
+            <tr  v-for="film in mostRecentAddedFilms" :key="film.id"
              v-bind:class='{ discontinued: films.discontinued, selected: selectedFilm === film }'
                 :title="JSON.stringify(film)"
                 @click="selectedfilm = film">
-                <span class="title">{{ film.title }} </span><br>
-                <span><img :src="film.image ? film.image : 'https://placeimg.com/200/200/tech'" width="50" style="float:right" /></span>
-                <span class="description">{{ film.description.substring(0,100)+"..." }}</span>
-                <br>
-                <span class="rating">rating: {{film.rating}}</span>
-                <span class="detail"><button><router-link to="/" + film.id>Voir détail</router-link></button></span>
-            </li>
-        </ul>
+                <th class="title">{{ film.title }}</th>
+                <td class="description">{{ film.description.substring(0,100)+"..." }}</td>
+                <td class="rating">{{film.rating}}</td>
+                <td><img :src="film.image ? film.image : 'https://placeimg.com/200/200/tech'" width="100" style="float:right" /></td>
+                <td><button @click="onSelect(film)">Voir détail </button></td>
+            </tr>
+          </table>
+        </div>
+         <table class="films" align="center">
+           <tr v-if="sortedFilteredPaginatedFilms.length === 0" >Il n'y a pas de film qui correspond à cette description</tr>
+           <div v-if="this.filterName !== ''">
+             <tr>Nombre de films trouvés: {{sortedFilteredPaginatedFilms.length}}</tr>
+             <tr>
+               <th>image</th>
+              <th>Titre</th>
+              <th>Description</th>
+              <th>Rating</th>
+              <th>Longueur</th>
+              
+            </tr>
+            <tr  v-for="film in sortedFilteredPaginatedFilms" :key="film.id"
+             v-bind:class='{ discontinued: films.discontinued, selected: selectedFilm === film }'
+                :title="JSON.stringify(film)"
+                @click="selectedfilm = film">
+                 <td><img :src="film.image ? film.image : 'https://placeimg.com/200/200/tech'" width="100" style="float:right" /></td>
+                <th class="title">{{ film.title }}</th>
+                <td class="description">{{ film.description.substring(0,100)+"..." }}</td>
+                <td class="rating"> {{film.rating}}</td>
+                <td class="rating"> {{film.length}} min</td>
+                <td><button @click="onSelect(film)">Voir détail </button></td>
+            </tr>
+
+         </div>
+        </table>
+        
         
 
     </div>
 </template>
 
 <script>
-
+//import FilmDetails from '@/views/FilmDetails.vue';
 
     export default {
         props: {
@@ -41,7 +78,7 @@
             pageSize: {
                 type: Number,
                 required: false,
-                default: 3
+                default: 20
             }
         },
         data(){
@@ -52,6 +89,7 @@
                 sortDir: 'asc',
                 pageNumber: 1,
                 sortName: 'modifiedDate',
+               
             }
         },
         
@@ -79,6 +117,14 @@
             let l = this.filteredFilms.length,
               s = this.pageSize;
             return Math.floor(l / s);
+          },
+          mostRecentAddedFilms(){
+            let filmsLength = this.films.length
+            var mostRecentFilm = this.films[filmsLength -1]
+            var secondMostRecentFilm = this.films[filmsLength -2]
+            var thirdMostRecentFilm = this.films[filmsLength -3]
+            var mostRecentFilms =[mostRecentFilm,secondMostRecentFilm,thirdMostRecentFilm]
+            return mostRecentFilms
           }
         },
         watch: {
@@ -109,19 +155,29 @@
           prevPage() {
             this.pageNumber--;
             this.selectedFilm = null;
+          },
+          onSelect(film) {
+            this.$router.push({ name: "films", params: { id: film.id } });
           }
         }
     }
 </script>
 
 <style >
- .films li{
-     padding:10px;
-     
- }
- .films .title{
-       margin-right: .8em;
 
- }
+th, td {
+  padding: 15px;
+  text-align: left;
+   font-family: "Times New Roman", Times, serif;
+   font-size: 30px;
+}
+fieldset{
+  padding: 15px;
+  font-size: 30px;
+}
+.page{
+  padding: 15px;
+}
+
 
 </style> 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <film-list :films="films" :page-size="3"></film-list>
+        <film-list :films="films" :page-size="20"></film-list>
         
     </div>
 </template>
@@ -16,6 +16,7 @@ import FilmList from '@/components/FilmList.vue';
             FilmList
         
         },
+    
         data() {
           return {
              films: [
@@ -38,17 +39,24 @@ import FilmList from '@/components/FilmList.vue';
                  {"id":17,"title":"ALONE TRIP","release_year":"2006","description":"A Fast-Paced Character Study of a Composer And a Dog who must Outgun a Boat in An Abandoned Fun House","rating":"R","length":82,"image":"","special_features":"Trailers,Behind the Scenes","language_id":1,"created_at":"2006-02-15T15:03:42.000000Z"},
                  {"id":18,"title":"ALTER VICTORY","release_year":"2006","description":"A Thoughtful Drama of a Composer And a Feminist who must Meet a Secret Agent in The Canadian Rockies","rating":"PG-13","length":57,"image":"","special_features":"Trailers,Behind the Scenes","language_id":1,"created_at":"2006-02-15T15:03:42.000000Z"},
                  {"id":19,"title":"AMADEUS HOLY","release_year":"2006","description":"A Emotional Display of a Pioneer And a Technical Writer who must Battle a Man in A Baloon","rating":"PG","length":113,"image":"","special_features":"Commentaries,Deleted Scenes,Behind the Scenes","language_id":1,"created_at":"2006-02-15T15:03:42.000000Z"},
-                 {"id":20,"title":"AMELIE HELLFIGHTERS","release_year":"2006","description":"A Boring Drama of a Woman And a Squirrel who must Conquer a Student in A Baloon","rating":"R","length":79,"image":"","special_features":"Commentaries,Deleted Scenes,Behind the Scenes","language_id":1,"created_at":"2006-02-15T15:03:42.000000Z"}]
+                 {"id":20,"title":"AMELIE HELLFIGHTERS","release_year":"2006","description":"A Boring Drama of a Woman And a Squirrel who must Conquer a Student in A Baloon","rating":"R","length":79,"image":"","special_features":"Commentaries,Deleted Scenes,Behind the Scenes","language_id":1,"created_at":"2006-02-15T15:03:42.000000Z"}
+                 ]
             } 
                
-             }
-         /*created () {
-            FilmService.getFilms()
-           .then(response => {this.films = response.data})
-            
-         }
+             },
+             //Retourne un arrau vide , je ne sais pas pourquoi
+    //       created () {
+    // FilmService.getFilms()
+    //   .then(response => {
+    //     this.films = response.data;
+    //   })
+    //   .catch(error => {
+    //     this.error = error;
+    //   })
+    
+  
         
-            getderniersfilms(){
+          /*  getderniersfilms(){
                   let l = Object.keys(this.films).length
                    return l
             }*/
